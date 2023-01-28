@@ -1,24 +1,16 @@
 from django.db import models
 
 
-class Address(models.Model):
-    class Meta:
-        verbose_name = "Адрес"
-        verbose_name_plural = "Адреса"
-
-    land = models.CharField(verbose_name="Страна", max_length=50, unique=True)
-    city = models.CharField(verbose_name="Город", max_length=50)
-    street = models.CharField(verbose_name="Улица", max_length=100)
-    house = models.CharField(verbose_name="Дом", max_length=10)
-
-
 class Contacts(models.Model):
     class Meta:
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
 
     email = models.EmailField(verbose_name="email address", blank=True)
-    address = models.ForeignKey(Address, verbose_name="Адрес", on_delete=models.PROTECT)
+    land = models.CharField(verbose_name="Страна", max_length=50, unique=True)
+    city = models.CharField(verbose_name="Город", max_length=50)
+    street = models.CharField(verbose_name="Улица", max_length=100)
+    house = models.CharField(verbose_name="Дом", max_length=10)
 
 
 class Products(models.Model):
@@ -62,7 +54,7 @@ class Retail_network(BaseModel):
         verbose_name = "Розничная сеть"
         verbose_name_plural = "Розничные сети"
 
-        supplier = models.ForeignKey(Factory, verbose_name="Поставщик", on_delete=models.PROTECT)
+    supplier = models.ForeignKey(Factory, verbose_name="Поставщик", on_delete=models.PROTECT)
 
 
 class Sole_trader(BaseModel):
@@ -70,4 +62,4 @@ class Sole_trader(BaseModel):
         verbose_name = "Индивидуальный предприниматель"
         verbose_name_plural = "Индивидуальные предприниматели"
 
-        supplier = models.ForeignKey(Retail_network, verbose_name="Поставщик", on_delete=models.PROTECT)
+    supplier = models.ForeignKey(Retail_network, verbose_name="Поставщик", on_delete=models.PROTECT)
